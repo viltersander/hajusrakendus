@@ -21,7 +21,7 @@ host('nimi.itmajakas.ee')
 set('repository', 'repo nimi');
 //Restart opcache
 task('opcache:clear', function () {
-    run('killall php80-cgi || true');
+    run('killall php81-cgi || true');
 })->desc('Clear opcache');
 
 task('build:node', function () {
