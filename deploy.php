@@ -15,7 +15,7 @@ host('ta21vilter.itmajakas.ee')
     ->setHostname('ta21vilter.itmajakas.ee')
     ->set('http_user', 'virt106870')
     ->set('deploy_path', '~/domeenid/www.ta21vilter.itmajakas.ee/hajusrakendus')
-    ->set('branch', 'main');
+    ->set('branch', 'master');
 
 // Tasks
 set('repository', 'git@github.com:viltersander/hajusrakendus.git');
@@ -42,5 +42,3 @@ task('deploy', [
     'artisan:cache:clear'
 ]);
 after('deploy:failed', 'deploy:unlock');
-
-//
