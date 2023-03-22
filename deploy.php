@@ -6,22 +6,22 @@ require 'recipe/laravel.php';
 
 // Project name
 set('application', 'projekti nimi');
-set('remote_user', ''); //virt...
-set('http_user', '');
+set('remote_user', 'virt106870'); //virt...
+set('http_user', 'virt106870');
 set('keep_releases', 2);
 
 // Hosts
-host('nimi.itmajakas.ee')
-    ->setHostname('nimi.itmajakas.ee')
-    ->set('http_user', '')
-    ->set('deploy_path', '~/domeenid/www.nimi.itmajakas.ee/kataloog')
-    ->set('branch', 'dev');
+host('ta21vilter.itmajakas.ee')
+    ->setHostname('ta21vilter.itmajakas.ee')
+    ->set('http_user', 'virt106870')
+    ->set('deploy_path', '~/domeenid/www.ta21vilter.itmajakas.ee/hajusrakendus')
+    ->set('branch', 'main');
 
 // Tasks
-set('repository', 'repo nimi');
+set('repository', 'git@github.com:viltersander/hajusrakendus.git');
 //Restart opcache
 task('opcache:clear', function () {
-    run('killall php80-cgi || true');
+    run('killall php81-cgi || true');
 })->desc('Clear opcache');
 
 task('build:node', function () {
@@ -42,3 +42,4 @@ task('deploy', [
     'artisan:cache:clear'
 ]);
 after('deploy:failed', 'deploy:unlock');
+
