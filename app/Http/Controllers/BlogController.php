@@ -23,10 +23,13 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        Blog::create($request->validate([
+        $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
-        ]));
+        ]);
+
+        Blog::on('mysql2')->create($validatedData);
+
         return redirect()->route('blog.index');
     }
 
