@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WeatherApiController;
 use App\Http\Controllers\MarkerController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ChirpController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,11 +47,9 @@ Route::post('/markers', [MarkerController::class, 'store'])->name('markers.store
 Route::put('/markers/{marker}', [MarkerController::class, 'update'])->name('markers.update');
 Route::delete('/markers/{marker}', [MarkerController::class, 'destroy'])->name('markers.destroy');
 
-Route::get('/blog', [BlogController::class, 'index']);
-Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
-Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
-Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->name('blog.edit');
-Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('blog.update');
-Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
+
+Route::resource('chirps', ChirpController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

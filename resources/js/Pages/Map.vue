@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <div class="lg:w-7/12 w-full h-96">
-    <div class="h-full w-full " id="map" ref="map"></div>
+    <div class="h-full w-full mx-2 my-2" id="map" ref="map"></div>
     <form class="grid w-72 gap-4 mt-4 mx-6" @submit.prevent="submit">
       <label for="">Name</label>
       <input type="text" v-model="form.name" required>
@@ -13,7 +13,7 @@
       <input type="text" v-model="form.lng" required>
       <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ form.marker_id ? 'Update Marker' : 'Add Marker' }}</button>
     </form>
-    <table class="table-fixed mt-8 mx-6 text-left">
+    <table class="table-fixed mt-8 mx-2 text-left">
       <thead>
         <tr>
           <th class="w-1/4">Name</th>

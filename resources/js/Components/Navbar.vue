@@ -5,19 +5,19 @@
             <div class="flex items-center ">
                 <Link
                     href="/weather"
-                    class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"
+                    class="block sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"
                 >
                     Weather
                 </Link>
                 <Link
                     href="/map"
-                    class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"
+                    class="block  sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"
                 >
                     Map
                 </Link>
                 <Link
                     href="/blog"
-                    class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"
+                    class="block sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"
                 >
                     Blog
                 </Link>
@@ -26,14 +26,14 @@
                     <Link
                         v-if="$page.props.auth.user"
                         :href="route('dashboard')"
-                        class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 sm:mt-0 ml-4"
+                        class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white sm:mt-0 ml-4"
                     >
                         Dashboard
                     </Link>
                     <template v-else>
                         <Link
                             :href="route('login')"
-                            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 sm:mt-0 ml-4"
+                            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white sm:mt-0 ml-4"
                         >
                             Log in
                         </Link>
@@ -58,15 +58,13 @@ import { Link } from '@inertiajs/vue3';
 
 const router = useRouter()
 
-// Check if user is logged in
-const isLoggedIn = computed(() => {
-return localStorage.getItem('user') !== null
+
+
+defineProps({
+    canLogin: Boolean,
+    canRegister: Boolean,
+    laravelVersion: String,
+    phpVersion: String,
 })
-
-function logout() {
-localStorage.removeItem('user')
-router.push('/')
-}
-
 </script>
   
