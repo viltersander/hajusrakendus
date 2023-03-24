@@ -71,7 +71,7 @@ let markers = ref(props.markers || []);
 
 //Google maps conf
 const loader = new Loader({
-  apiKey: import.meta.env.VITE_GOOGLEMAPS_KEY,
+  apiKey: '',
   version: "weekly",
 });
 

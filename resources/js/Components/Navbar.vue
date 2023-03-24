@@ -1,8 +1,8 @@
 <template>
     <nav class="bg-gray-800">
-        <div class="max-w-screen-lg mx-auto px-4">
+        <div class="px-6">
         <div class="flex items-center justify-between h-16">
-            <div class="flex items-center">
+            <div class="flex items-center ">
                 <Link
                     href="/weather"
                     class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"
