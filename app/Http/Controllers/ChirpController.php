@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chirp;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,9 +15,8 @@ class ChirpController extends Controller
      */
     public function index(): Response
     {
-        return 'Hello, World!';
-        return Inertia::render('Chirps/Index', [
-            //
+        return Inertia::render('Index', [
+            'chirps' => Chirp::with('user:id,name')->latest()->get(),
         ]);
     }
 
@@ -31,9 +31,16 @@ class ChirpController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request): RedirectResponse
+    {   
+        
+        $validated = $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+        
+        $request->user()->chirps()->create($validated);
+        
+        return redirect(route('chirps.index'));
     }
 
     /**
@@ -52,19 +59,37 @@ class ChirpController extends Controller
         //
     }
 
-    /**
+        /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Chirp $chirp)
+    public function update(Request $request, Chirp $chirp): RedirectResponse
     {
-        //
+        if (auth()->user()->is_admin || $chirp->user_id === auth()->id()) {
+            $validated = $request->validate([
+                'message' => 'required|string|max:255',
+            ]);
+    
+            $chirp->update($validated);
+    
+            return redirect(route('chirps.index'));
+        }
+        
+        // User is not authorized to update the chirp
+        // For example, you can redirect back with an error message
+        return redirect()->back()->with('error', 'You are not authorized to update this chirp.');
     }
-
-    /**
+        /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chirp $chirp)
+    public function destroy(Chirp $chirp): RedirectResponse
     {
-        //
+        if (auth()->user()->is_admin) {
+            $chirp->delete();
+            return redirect(route('chirps.index'));
+        }
+        
+        // User is not an admin, handle unauthorized access
+        // For example, you can redirect back with an error message
+        return redirect()->back()->with('error', 'Only admins can delete chirps.');
     }
 }

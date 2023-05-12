@@ -101,7 +101,7 @@ onMounted(() => {
               content: `
                 <div>
                   <h3>${marker.name}</h3>
-                  <p>${marker.description}</p>
+                  <p>${marker.description ? marker.description : ''}</p>
                 </div>
               `,
             });
